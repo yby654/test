@@ -1,0 +1,4 @@
+mvn sonar:sonar \
+  -Dsonar.projectKey=sonar \
+  -Dsonar.host.url=http://192.168.169.135:30647 \
+  -Dsonar.login=eeb67f86f826468fe632b6c61d835e37eba6936f
