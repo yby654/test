@@ -42,7 +42,7 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>development</id>
+            <id>production</id>
             <build>
                 <resources>
                     <resource>
