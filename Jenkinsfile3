@@ -1,7 +1,23 @@
 #!/usr/bin/env groovy
 import hudson.model.*
+sonar
+http://192.168.169.137:15001/
 
 node {
+      stage('Sonarqube') {
+          environment {
+              scannerHome = tool 'sonarScanner'
+          }
+          steps {
+              withSonarQubeEnv('sonarqube') {
+                  sh "${scannerHome}/bin/sonar-scanner"
+              }
+
+              timeout(time: 10, unit: "MINUTES") {
+                  waitForQualityGate abortPipeline: true
+              }
+          }
+      }
       stage('Maven') {
           sh 'mvn clean install'
       }
