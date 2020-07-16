@@ -2,7 +2,7 @@
 import hudson.model.*
 
 node {
-      stage('Sonarqube') {
+      stage('sonarqube') {
               environment {
                   scannerHome = tool 'sonarScanner'
               }
