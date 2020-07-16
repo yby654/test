@@ -6,12 +6,12 @@ node {
           sh 'mvn clean install'
       }
       stage('Docker Build image') {
-          withDockerRegistry('https://registry.hub.docker.com', 'docker-id') {
+          withDockerRegistry('', 'docker-id-label') {
               sh 'docker build -t yby654/demo:latest ./Dockerfile .'
           }
       }
       stage('Docker Push image') {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-id') {
+          docker.withRegistry('', 'docker-id-label') {
             docker.image('yby654/demo:latest').push()
           }
       }
