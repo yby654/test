@@ -3,14 +3,12 @@ import hudson.model.*
 
 node {
       stage('Sonarqube') {
-          environment {
-              scannerHome = tool 'sonarScanner'
-          }
-          steps {
+              environment {
+                  scannerHome = tool 'sonarScanner'
+              }
               withSonarQubeEnv('sonarqube') {
                   sh "${scannerHome}/bin/sonar-scanner"
               }
-
               timeout(time: 10, unit: "MINUTES") {
                   waitForQualityGate abortPipeline: true
               }
