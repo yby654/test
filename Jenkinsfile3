@@ -9,7 +9,7 @@ node {
           sh 'docker build -t yby654/demo:latest .'
       }
       stage('Docker Push image') {
-          docker.withDockerRegistry([credentialsId: "05282a6e-7ab0-4cfb-b32f-399f2ee09770", url: "https://index.docker.io/v1/"]) {
+          withDockerRegistry([credentialsId: "05282a6e-7ab0-4cfb-b32f-399f2ee09770", url: "https://index.docker.io/v1/"]) {
           sh 'docker push yby654/demo:latest'
           }
       }
