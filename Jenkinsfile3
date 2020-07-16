@@ -6,14 +6,11 @@ node {
       sh 'mvn clean install'
   }
   stage('Docker Build image') {
-      sh 'docker build -f target/demo-0.0.1-SNAPSHOT.jar -t yby654/demo:latest .'
+      sh 'docker build -t yby654/demo:latest .'
   }
   stage('Docker Push image') {
-    when {
-      branch 'master'
-    }
         withDockerRegistry([credentialsId: "05282a6e-7ab0-4cfb-b32f-399f2ee09770", url: "https://index.docker.io/v1/"]) {
-        sh 'docker build -f target/demo-0.0.1-SNAPSHOT.jar -t yby654/demo:latest .'
+        sh 'docker push yby654/demo:latest'
     }
   }
 }
