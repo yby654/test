@@ -2,29 +2,14 @@
 import hudson.model.*
 
 node {
-      stage('sonarqube') {
-              environment {
-                  scannerHome = tool 'sonarScanner'
-              }
-              withSonarQubeEnv('sonarqube') {
-                  sh "${scannerHome}/bin/sonar-scanner"
-              }
-              timeout(time: 10, unit: "MINUTES") {
-                  waitForQualityGate abortPipeline: true
-              }
-          }
-      stage('Maven') {
-          sh 'mvn clean install'
-      }
-      stage('Docker Build image') {
-          docker.withRegistry("https://registry.hub.docker.com", 'docker-id-hub') {
-              sh 'docker build -t yby654/demo:latest -f ./Dockerfile .'
-          }
-      }
-      stage('Docker Push image') {
-          docker.withRegistry("https://registry.hub.docker.com", 'docker-id-hub') {
-              docker.image('yby654/demo:latest').push()
-          }
-      }
-
+    stage('Docker Build image') {
+        docker.withRegistry("https://registry.hub.docker.com", 'docker-id-hub') {
+            sh 'docker build -t yby654/demo:latest -f ./Dockerfile .'
+        }
+    }
+    stage('Docker Push image') {
+        docker.withRegistry("https://registry.hub.docker.com", 'docker-id-hub') {
+            docker.image('yby654/demo:latest').push()
+        }
+    }
 }
