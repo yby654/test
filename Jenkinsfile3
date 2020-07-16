@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
 import hudson.model.*
-sonar
-http://192.168.169.137:15001/
 
 node {
       stage('Sonarqube') {
