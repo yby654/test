@@ -6,7 +6,7 @@ node {
           sh 'mvn clean install'
       }
       stage('Docker Build image') {
-              sh 'docker build -t yby654/demo:latest ./Dockerfile .'
+              sh 'docker build -t yby654/demo:latest .'
       }
       stage('Docker Push image') {
             docker.image('yby654/demo:latest').push()
