@@ -2,17 +2,16 @@
 import hudson.model.*
 
 node {
-    def registryCredential = "docker-registry-hub"
       stage('Maven') {
           sh 'mvn clean install'
       }
       stage('Docker Build image') {
-          withDockerRegistry([credentialsId: "$registryCredential", url: "https://index.docker.io/v1/"]) {
+          withDockerRegistry([credentialsId: "05282a6e-7ab0-4cfb-b32f-399f2ee09770", url: "https://index.docker.io/v1/"]) {
               sh 'docker build -t yby654/demo:latest ./Dockerfile .'
           }
       }
       stage('Docker Push image') {
-          withDockerRegistry([credentialsId: "$registryCredential", url: "https://index.docker.io/v1/"]) {
+          withDockerRegistry([credentialsId: "05282a6e-7ab0-4cfb-b32f-399f2ee09770", url: "https://index.docker.io/v1/"]) {
             docker.image('yby654/demo:latest').push()
           }
       }
