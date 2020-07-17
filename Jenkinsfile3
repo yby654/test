@@ -5,7 +5,7 @@ node {
     try {
         stage('Docker Build image') {
             docker.withRegistry("https://registry.hub.docker.com", 'docker-id-hub') {
-                sh 'docker build -t yby654/demo:latest -f ./Dockerfile .'
+                sh 'docker build -t yby654/demo:latest .'
             }
         }
         stage('Docker Push image') {
