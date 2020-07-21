@@ -1,0 +1,12 @@
+stages:
+- name: mvn
+  steps:
+  - runScriptConfig:
+      image: maven:3.6.1-jdk-8-alpine
+      shellScript: mvn clean install
+  when:
+    branch:
+      include:
+      - master
+timeout: 60
+notification: {}
